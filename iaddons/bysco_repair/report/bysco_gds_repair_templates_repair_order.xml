@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--        引入样式文件替换默认repair表格模式-->
+        <template id="my_style_name" inherit_id="web.report_assets_common">
+            <xpath expr="." position="inside">
+                <link href="/bysco_repair/static/css/bysco_repair_style.css" rel="stylesheet" type="text/scss"/>
+            </xpath>
+        </template>
+
+        <template id="bysco_report_repairorder">
+            <t t-set="o" t-value="doc"/>
+            <t t-call="web.basic_layout">
+                <div>
+                    <!--                    log、表单名字、公司详细信息-->
+                    <div class="gds-border gds-title-bar">
+                        <ul>
+                            <li>
+                                <!--                                log-->
+                                <img class="gds-log" src="/bysco_repair/static/images/gds_log.png"></img>
+                            </li>
+                            <li>
+                                <!--                                单据名称-->
+                                <span class="gds-bill-name">维修报价单</span>
+                            </li>
+                        </ul>
+                        <!--                        公司名称、公司地址、电话、网址-->
+                        <ul class="gds-company-subsidiary">
+                            <li>
+                                <span t-field="o.company_id"></span>
+                            </li>
+                            <li>地址：
+                                <span t-field="o.company_id.street"></span>
+                            </li>
+                            <li>电话：
+                                <span t-field="o.company_id.phone"></span>
+                            </li>
+                            <li>网址：
+                                <span t-field="o.company_id.website"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--                    打印日期、维修单号、页码-->
+                    <div class="gds-Signature-detail-2 gds-border">
+                        <ul>
+                            <li>打印日期：
+                                <span t-esc="datetime.datetime.now().strftime('%Y-%m-%d')"
+                                      t-options="{'widget': 'date'}" class="m-0"></span>
+                            </li>
+                            <li>维修单号：</li>
+                            <li>页码：1/1</li>
+                        </ul>
+                    </div>
+                    <!--                    客户，送货地址-->
+                    <div class="gds-border">
+                        <ul>
+                            <li>
+                                <span>客户：</span>
+                                <span t-field="o.partner_id"></span>
+                            </li>
+                            <li>
+                                <span>送货地址：</span>
+                                <span t-field="o.partner_id.street"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--                    订立条款-->
+                    <div class="gds-Conclusion-terms">
+                        <p>兹经买卖双方同意成交下列商品订立条款如下：</p>
+                    </div>
+                    <table border="1">
+                        <thead>
+                            <tr class="gds-repair-table-header">
+                                <th class="gds-operation-type">
+                                    <span>操作类型</span>
+                                </th>
+                                <th class="gds-bar-code">
+                                    <span>条码</span>
+                                </th>
+                                <th class="gds-explain">
+                                    <span>产品说明</span>
+                                </th>
+                                <th class="gds-source">
+                                    <span>领料来源</span>
+                                </th>
+                                <th class="gds-location">
+                                    <span>目的位置</span>
+                                </th>
+                                <th class="gds-count">
+                                    <span>数量</span>
+                                </th>
+                                <th class="gds-unit">
+                                    <span>单位</span>
+                                </th>
+                                <th class="gds-price">
+                                    <span>单价</span>
+                                </th>
+                                <th class="gds-subtotal">
+                                    <span>小计</span>
+                                </th>
+                                <th class="gds-remark">
+                                    <span>备注</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-if="o.operations">
+                                <tr t-foreach="o.operations" t-as="line" class="gds-repair-table-body">
+                                    <!--                                    操作类型-->
+                                    <td>
+                                        <p t-if="line.type == 'add'">
+                                            <i>添加</i>
+                                        </p>
+                                        <p t-if="line.type == 'remove'">
+                                            <i>移除</i>
+                                        </p>
+                                    </td>
+                                    <!--                                    条码-->
+                                    <td>
+                                        <span t-field="line.product_id.barcode"></span>
+                                    </td>
+                                    <!--                                    产品说明-->
+                                    <td>
+                                        <span t-field="line.name"></span>
+                                    </td>
+                                    <!--                                    领料来源，生产位置字段：property_stock_production，库存位置：property_stock_inventory-->
+                                    <td>
+                                        <span t-field="line.location_id"></span>
+                                    </td>
+                                    <!--                                    目的位置：-->
+                                    <td>
+                                        <span t-field="line.location_id"></span>
+                                    </td>
+                                    <!--                                    数量：product_uom_qty-->
+                                    <td>
+                                        <span t-field="line.product_uom_qty"></span>
+                                    </td>
+                                    <!--                                    单位：-->
+                                    <td>
+                                        <span>支</span>
+                                    </td>
+                                    <!--                                    单价：price_unit-->
+                                    <td>
+                                        <span t-field="line.price_unit"></span>
+                                    </td>
+                                    <!--                                    小计：price_subtotal-->
+                                    <td>
+                                        <span t-field="line.price_subtotal"></span>
+                                    </td>
+                                    <!--                                    备注：price_subtotal-->
+                                    <td>
+
+                                    </td>
+                                </tr>
+                            </t>
+
+                        </tbody>
+                    </table>
+                    <!--                    条款-->
+                    <div class="gds-clause">
+                        <ul>
+                            <li>1 付款期限： 立即付款</li>
+                            <li>2 交货地点、运输费用. 需方仓库交货，运费由供方承担。</li>
+                            <li>3 质量要求. 以双方确认的《产品检验标准》为依据，《产品检验标准》作为本合同附件</li>
+                            <li>4 验收标准.
+                                以双方确认的《产品检验标准》为质量标准验收，对检验中发现质量不符合质量要求的，由需方通知供方，供方接到通知后确认有质量问题的由供方负责换货，所发生的运输及检验费用由供方承担。
+                            </li>
+                            <li>5 违约责任及解决合同纠纷的方式. 双方本着互惠互利的原则进行友好协商，如未能有效地解决，由签订地人民法院依《合同法》相关规定处理。守约方可依法要求违约方赔偿一切经济损失。
+                            </li>
+                            <li>6 其它约定事项. (1). 本合同传真、复印件具有同等法律效力 (2).
+                                本合同一式两份，合同附件为本合同不可分割的组成部份，同具法律效力，双方各执一份，自双方签章之日起生效。
+                            </li>
+                            <li>7 付款方式及期限.</li>
+                            <li>8 合同生效约定. 需方发出此合同起48小时内，供方应回签此合同，否则将视为默认接受此合同所有条款。</li>
+                            <li>9 交货方式. 按需方采购或物控部门提供的交货计划进行有序交货，不能延误和提前交货。外箱必须贴上含有需方的订单号、条码号、型号规格等内容的标签。</li>
+                        </ul>
+                    </div>
+                    <!--                    制单人、审核、回签-->
+                    <div class="gds-Signature-detail">
+                        <ul>
+                            <li>
+                                <span>制单人：</span>
+                            </li>
+                            <li>
+                                <span>审核：</span>
+                            </li>
+                            <li>
+                                <span>供应商回签：</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <template id="report_repairorder2">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc" style="border: 1px solid #ff0;">
+                    <t t-call="bysco_repair.bysco_report_repairorder" t-lang="doc.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

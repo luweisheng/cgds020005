@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!---->
+        <report
+                string="打印维修单"
+                id="action_report_repair_order"
+                model="repair.order"
+                name="bysco_repair.report_repairorder2"
+                file="bysco_repair.report_repairorder"
+                report_type="qweb-pdf"
+                print_report_name="(
+                object.state == 'draft' and 'Repair Quotation - %s' % (object.name) or
+                'Repair Order - %s' % (object.name))"
+                paperformat="chinese_product_barcode"
+        />
+    </data>
+</odoo>

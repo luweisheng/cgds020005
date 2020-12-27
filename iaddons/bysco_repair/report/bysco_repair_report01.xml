@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="my_style_name" inherit_id="web.report_assets_common">
+            <xpath expr="." position="inside">
+                <link href="/bysco_repair/static/css/bysco_repair_style.css" rel="stylesheet" type="text/scss"/>
+            </xpath>
+        </template>
+        <!-- id：生成的记录的外部ID
+             string：（映射到IrActionsReport.name字段）如果print_report_name未指定，则用作文件名。否则，仅当在某种列表中查找报告时用作报告的助记符/说明
+             name：（必填）（映射到IrActionsReport.report_name字段）用于呈现报告的模板的名称
+             model：（必填）您的报告所要使用的模型
+             report_type：（必填）无论是qweb-pdf对于PDF报告或qweb-html为HTML
+             print_report_name：定义报告名称的python表达式
+             groups：Many2many 字段允许查看/使用当前报告的组
+             attachment_use：如果设置为True，则将使用attachment表达式生成的名称将报告存储为记录的附件；如果您只需要一次生成报告（例如，出于法律原因），则可以使用此选项
+             attachment：定义报告名称的python表达式；记录作为变量是必需的object-->
+        <report
+                string="维修单"
+                id="action_bysco_repair"
+                model="repair.order"
+                name="bysco_repair.report_repair_order"
+                report_type="qweb-pdf"
+                print_report_name="'维修单 - %s - %s' % (object.partner_id.name, object.display_name)"
+        />
+
+        <template id="report_repair_order">
+            <t t-set="doc" t-value="o"/>
+            <t t-call="web.basic_layout">
+                <!--external_layout将在报表上添加默认的页眉和页脚-->
+                <div class="gds-repair-bill-content">
+                    <!--                        表头-->
+                    <div class="header-table">
+                        <ul class="ul-display-flex">
+                            <li class="ul-display-flex header-table-col-1">
+                                <ul>
+                                    <!--                                        Log-->
+                                    <li>
+                                    </li>
+                                    <!--                                        单据名称-->
+                                    <li>
+                                        <h2>维修报价单</h2>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="header-table-col-2">
+                                <ul>
+                                    <li>广州市哥得圣电动车有限公司</li>
+                                    <li>地址： 广州市花都区新雅街广塘村106国道东商业街105号</li>
+                                    <li>电话： 020-81989556/18620609666</li>
+                                    <li>网址： http://www.gedesheng.cc</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--                        打印日期、维修单号、页码-->
+                    <div>
+                        <ul class="ul-display-flex header-table-row-2">
+                            <li>打印日期：</li>
+                            <li>维修单号：</li>
+                            <li>页码：1/1</li>
+                        </ul>
+                    </div>
+                    <!--                        客户名称、送货地址-->
+                    <div>
+                        <ul class="header-table-row-3">
+                            <li>客户： [YGW04] 深圳市英格威智能科技有限公司</li>
+                            <li>送货地址： 深圳龙岗坂田永香路2号江南大厦208</li>
+                        </ul>
+                    </div>
+                    <!--                        签订条款头-->
+                    <div class="header-table-row-4">
+                        <span>兹经买卖双方同意成交下列商品订立条款如下：</span>
+                    </div>
+                    <!--                        明细表头-->
+                    <div>
+                        <ul class="ul-display-flex header-table-row-4">
+                            <li>操作类型</li>
+                            <li>条码</li>
+                            <li>产品说明</li>
+                            <li>领料来源</li>
+                            <li>目的位置</li>
+                            <li>数量</li>
+                            <li>单位</li>
+                            <li>单价</li>
+                            <li>小计</li>
+                            <li>备注</li>
+                        </ul>
+                    </div>
+                    <!--                        维修退换物品明细-->
+                    <div style="border:5px solid #f00;width:100px; height:100px;">
+                        <t t-foreach="o.operations" t-as="line">
+<!--                        <t t-foreach="operations" t-as="line">-->
+                            <span>0123456</span>
+                            <span t-field="line.name"/>
+                        </t>
+                    </div>
+                    <div style="border:5px solid #00f;width:100px; height:100px;"></div>
+                    <!--                        合同条款-->
+                    <div>
+                        <ul class="header-table-row-5">
+                            <li>1 付款期限： 立即付款</li>
+                            <li>2 交货地点、运输费用. 需方仓库交货，运费由供方承担。</li>
+                            <li>3 质量要求. 以双方确认的《产品检验标准》为依据，《产品检验标准》作为本合同附件</li>
+                            <li>4 验收标准.
+                                以双方确认的《产品检验标准》为质量标准验收，对检验中发现质量不符合质量要求的，由需方通知供方，供方接到通知后确认有质量问题的由供方负责换货，所发生的运输及检验费用由供方承担。
+                            </li>
+                            <li>5 违约责任及解决合同纠纷的方式.
+                                双方本着互惠互利的原则进行友好协商，如未能有效地解决，由签订地人民法院依《合同法》相关规定处理。守约方可依法要求违约方赔偿一切经济损失。
+                            </li>
+                            <li>6 其它约定事项. (1). 本合同传真、复印件具有同等法律效力 (2).
+                                本合同一式两份，合同附件为本合同不可分割的组成部份，同具法律效力，双方各执一份，自双方签章之日起生效。
+                            </li>
+                            <li>7 付款方式及期限.</li>
+                            <li>8 合同生效约定. 需方发出此合同起48小时内，供方应回签此合同，否则将视为默认接受此合同所有条款。</li>
+                            <li>9 交货方式.
+                                按需方采购或物控部门提供的交货计划进行有序交货，不能延误和提前交货。外箱必须贴上含有需方的订单号、条码号、型号规格等内容的标签。
+                            </li>
+                        </ul>
+                    </div>
+                    <!--                        制单人、审核、供应商回签-->
+                    <div>
+                        <ul class="ul-display-flex">
+                            <li>制单人：</li>
+                            <li>审核：</li>
+                            <li>供应商：</li>
+                        </ul>
+                    </div>
+                </div>
+            </t>
+
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,115 @@
+div, ul, li{
+    margin: 0;
+    padding: 0;
+}
+ul{
+    list-style: none;
+}
+/**/
+.gds-repair-table-body td:last-child{
+    width: 20%;
+}
+/*Log 标题栏 公司明细*/
+.gds-title-bar{
+    display: flex;
+    position: relative;
+}
+.gds-title-bar ul:nth-child(1){
+    width: 800px;
+    height: 150px;
+    margin-left: 60px;
+    display: flex;
+    line-height: 150px;
+    border-right: 1px solid #000;
+}
+.gds-bill-name{
+    margin-left: 50px;
+    font-size: 100px;
+}
+.gds-company-subsidiary{
+    margin-top: 30px;
+    margin-left: 30px;
+    color: #800080;
+}
+/*打印日期、维修单号、页码*/
+.gds-Signature-detail-2{
+
+}
+/*表格tag、类型、产品说明。。。。。。。。。说明样式*/
+.gds-repair-table-header, .gds-repair-table-body td, .gds-clause, .gds-Signature-detail, .gds-Conclusion-terms{
+    border: 1px solid #000;
+}
+.gds-border{
+    border: 1px solid #000;
+}
+
+.gds-repair-table-header th{
+    border-left: 1px solid #000;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.gds-repair-table-header th span{
+    display:inline-block
+}
+/*操作类型宽度*/
+.gds-operation-type{
+    width:80px;;
+}
+
+/*条码宽度*/
+.gds-bar-code{
+    width:150px;;
+}
+
+/*产品说明宽度*/
+.gds-explain{
+    width:300px;;
+}
+
+/*数量宽度 目的位置  单价宽度 小计宽度*/
+.gds-count, .gds-price, .gds-subtotal, .gds-location, .gds-source{
+    width: 100px;
+}
+
+/*单位宽度*/
+.gds-unit{
+    width: 30px;
+}
+
+/*主体内容样式*/
+.gds-repair-table-body td{
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+/*制单人、审核、回签样式*/
+.gds-Signature-detail ul, .gds-Signature-detail-2 ul, .gds-Conclusion-terms{
+    height: 30px;
+    display: flex;
+    line-height: 30px;
+}
+
+.gds-Signature-detail ul li:nth-child(1){
+    margin-left: 20px;
+}
+.gds-Signature-detail ul li:nth-child(2){
+    margin-left: 500px;
+}
+.gds-Signature-detail-2 ul li:nth-child(2){
+    margin-left: 420px;
+}
+.gds-Signature-detail-2 ul li:nth-child(3){
+    margin-left: 450px;
+}
+.gds-Signature-detail ul li:nth-child(3){
+    margin-left: 500px;
+}
+
+/*维修报价单*/
+.gds-log{
+
+}
+

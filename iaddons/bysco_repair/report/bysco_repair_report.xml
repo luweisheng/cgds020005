@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="my_style_name" inherit_id="web.report_assets_common">
+            <xpath expr="." position="inside">
+                <link href="/bysco_repair/static/css/bysco_repair_style.css" rel="stylesheet" type="text/scss"/>
+            </xpath>
+        </template>
+        <!-- id：生成的记录的外部ID
+             string：（映射到IrActionsReport.name字段）如果print_report_name未指定，则用作文件名。否则，仅当在某种列表中查找报告时用作报告的助记符/说明
+             name：（必填）（映射到IrActionsReport.report_name字段）用于呈现报告的模板的名称
+             model：（必填）您的报告所要使用的模型
+             report_type：（必填）无论是qweb-pdf对于PDF报告或qweb-html为HTML
+             print_report_name：定义报告名称的python表达式
+             groups：Many2many 字段允许查看/使用当前报告的组
+             attachment_use：如果设置为True，则将使用attachment表达式生成的名称将报告存储为记录的附件；如果您只需要一次生成报告（例如，出于法律原因），则可以使用此选项
+             attachment：定义报告名称的python表达式；记录作为变量是必需的object-->
+        <report
+                string="维修单"
+                id="action_bysco_repair"
+                model="repair.order"
+                name="bysco_repair.report_repair_order"
+                report_type="qweb-pdf"
+                print_report_name="'维修单 - %s - %s' % (object.partner_id.name, object.display_name)"
+        />
+
+
+        <template id="report_repair_order">
+            <t t-set="doc" t-value="o"/>
+            <t t-call="web.basic_layout">
+                <!--external_layout将在报表上添加默认的页眉和页脚-->
+                <div class="gds-repair-bill-content">
+                    <!--                        表头-->
+                    <div class="header-table">
+                        <ul class="ul-display-flex">
+                            <li class="ul-display-flex header-table-col-1">
+                                <ul style="display:flex; justify-content: space-between; align-items: center;">
+                                    <!--                                        Log-->
+                                    <li>
+                                    </li>
+                                    <!--                                        单据名称-->
+                                    <li>
+                                        <h2>维修报价单</h2>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="header-table-col-2">
+                                <ul>
+                                    <li>广州市哥得圣电动车有限公司</li>
+                                    <li>地址： 广州市花都区新雅街广塘村106国道东商业街105号</li>
+                                    <li>电话： 020-81989556/18620609666</li>
+                                    <li>网址： http://www.gedesheng.cc</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--                        打印日期、维修单号、页码-->
+                    <div>
+                        <ul class="ul-display-flex header-table-row-2">
+                            <li>打印日期：</li>
+                            <li>维修单号：</li>
+                            <li>页码：1/1</li>
+                        </ul>
+                    </div>
+                    <!--                        客户名称、送货地址-->
+                    <div>
+                        <ul class="header-table-row-3">
+                            <li>客户： [YGW04] 深圳市英格威智能科技有限公司</li>
+                            <li>送货地址： 深圳龙岗坂田永香路2号江南大厦208</li>
+                        </ul>
+                    </div>
+                    <!--                        签订条款头-->
+                    <div class="header-table-row-4">
+                        <span>兹经买卖双方同意成交下列商品订立条款如下：</span>
+                    </div>
+                    <!--                        明细表头-->
+                    <div>
+                        <ul class="ul-display-flex header-table-row-4">
+                            <li>操作类型</li>
+                            <li>条码</li>
+                            <li>产品说明</li>
+                            <li>领料来源</li>
+                            <li>目的位置</li>
+                            <li>数量</li>
+                            <li>单位</li>
+                            <li>单价</li>
+                            <li>小计</li>
+                            <li>备注</li>
+                        </ul>
+                    </div>
+                    <!--                        维修退换物品明细-->
+                    <div style="border:5px solid #f00;width:100%; height:100px;">
+                        <t t-foreach="doc.operations" t-as="line">
+                            <!--                        <t t-foreach="operations" t-as="line">-->
+                            <span>0123456</span>
+                            <span t-field="line.name"/>
+                        </t>
+                    </div>
+                    <!--                        合同条款-->
+                    <div>
+                        <ul class="header-table-row-5">
+
+                        </ul>
+                    </div>
+                    <!--                        制单人、审核、供应商回签-->
+                    <div>
+                        <ul class="ul-display-flex">
+                            <li>制单人：</li>
+                            <li>审核：</li>
+                            <li>供应商：</li>
+                        </ul>
+                    </div>
+                </div>
+            </t>
+
+        </template>
+
+        <!--        遍历表格的主体-->
+        <template id="report_repair_order">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="sale.report_saleorder_document" t-lang="doc.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

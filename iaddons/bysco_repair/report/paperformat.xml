@@ -1,0 +1,94 @@
+<odoo>
+    <data>
+        <record id="chinese_business_a4" model="report.paperformat">
+            <field name="name">中国商业合同 A4</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">35</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">3</field>
+            <field name="margin_right">3</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">30</field>
+            <field name="dpi">96</field>
+        </record>
+        <record id="chinese_product_barcode" model="report.paperformat">
+            <field name="name">产品条码</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">100</field>
+            <field name="page_width">100</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">2</field>
+            <field name="margin_left">4</field>
+            <field name="margin_right">4</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">300</field>
+        </record>
+        <record id="chinese_contract_a4_sale_bom" model="report.paperformat">
+            <field name="name">中国商业合同 A4(sale_bom)</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">23</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">3</field>
+            <field name="margin_right">3</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">18</field>
+            <field name="dpi">96</field>
+        </record>
+        <record id="chinese_contract_a4_delivery_order" model="report.paperformat">
+            <field name="name">中国商业合同 A4(delivery_order)</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">50</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">3</field>
+            <field name="margin_right">3</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">45</field>
+            <field name="dpi">96</field>
+        </record>
+        <record id="chinese_contract_a4_no_header" model="report.paperformat">
+            <field name="name">中国商业合同 A4</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">10</field>
+            <field name="margin_bottom">10</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">96</field>
+        </record>
+        <record id="chinese_split_triplet_paper" model="report.paperformat">
+            <field name="name">Chinese Split Triplet Paper(中国二分三联纸215x140)</field>
+            <field name="default" eval="True"/>
+            <field name="format">custom</field>
+            <field name="page_height">142</field>
+            <field name="page_width">215</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">38</field>
+            <field name="margin_bottom">35</field>
+            <field name="margin_left">10</field>
+            <field name="margin_right">10</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">33</field>
+            <field name="dpi">96</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,12 @@
+.o_web_client .o_view_grid tbody th div > div{
+    background-color: #BDE5E4;
+}
+.byscotestdiv{
+    background-color: #BDE5E4;
+}
+
+/*@media (min-width: 576px)*/
+/*.o_web_client .o_view_grid table {*/
+/*取消width: auto;即可设置宽度*/
+/*    !* width: auto; *!*/
+/*}*/

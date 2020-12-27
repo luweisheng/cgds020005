@@ -1,0 +1,9 @@
+<odoo>
+    <data>
+        <template id="随意" inherit_id="web.assets_backend">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="/bysco_stock/static/src/css/styles.css"/>
+            </xpath>
+        </template>
+    </data>
+</odoo>
